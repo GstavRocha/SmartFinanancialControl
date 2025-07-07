@@ -1,0 +1,4 @@
+matplotlib
+tkinter
+sqlite3
+sudo apt-get install python3-tk

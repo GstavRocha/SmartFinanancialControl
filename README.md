@@ -1,4 +1,13 @@
 # SmartFinanancialControl
+# Sistema Financeiro Desktop
+
+💡 Um sistema simples para controle financeiro em Python + SQLite.
+
+## Como executar
+
+```bash
+cd src
+python main.py
 
 financeiro_desktop/
 ├── src/
@@ -21,3 +30,5 @@ financeiro_desktop/
 │
 ├── requirements.txt                # Dependências (ex.: matplotlib)
 └── README.md                       # Documentação básica do projeto
+
+```
