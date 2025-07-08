@@ -2,21 +2,35 @@
 
 ```mermaid
 classDiagram
-    class clientes
-    clientes: +int idCliente
-    clientes: +varchar nomeCliente
-    clientes: +varchar contato
-    clientes: +varchar email
-    clientes: +float saldoDevedor
-    clientes: +int taxaJuros
-    clientes: +date diaPagamento
-    clientes: +date vencimento
-    clientes: +timestamp atualizadoEm
+    class clientes{
+        +int id_cliente
+        +varchar nome_cliente
+        +varchar contato
+        +varchar email
+        +timestamp atualizadoEm
+    }
 
-    class caixa
-    caixa: +int idCaixa
-    caixa: +float saldoCaixa
-    caixa: +float taxtaProlabore
-    caixa: +date timeStamp
+    class emprestimos{
+        +int id_emprestimos
+        +real valor_principal
+        +real juros_mensal
+        +date data_emprestimo
+        +int numero_parcelas
+        +enum[ativo, quitado, atrasodo default 'ativo'] status
+        +int id_cliente(clientes)
+    }
+
+    class parcelas{
+        +int id_parcelas
+        +int numero_emprestimo
+        +real valor_parcela
+        +date data_vencimento
+        +date data_pagamento
+        +enum status
+        +int id_emprestimo(emprestimos)
+    }
+    class pagamentos{
+        
+    }
 
 ```
