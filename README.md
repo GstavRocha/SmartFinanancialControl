@@ -32,3 +32,9 @@ financeiro_desktop/
 └── README.md                       # Documentação básica do projeto
 
 ```
+
+* abrir uma notificação;
+* soma de entrada e valor total;
+* lembrete com notificação;
+* Os usuários em abertos devem ser notifificados,
+* Fazer os gráficos dos rendimentos por mês;

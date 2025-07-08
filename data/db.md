@@ -7,6 +7,8 @@ classDiagram
         +varchar nome_cliente
         +varchar contato
         +varchar email
+        +varchar endereco
+        +varchar foto
         +timestamp atualizadoEm
     }
 
@@ -30,7 +32,20 @@ classDiagram
         +int id_emprestimo(emprestimos)
     }
     class pagamentos{
-        
+        +int id_pagamentos
+        +int id_parcelas(parcelas)
+        +real valor_pago
+        +timestamp data_pagamento 
+        +text observacao
     }
+    class usuarios{
+        +int id_usuarios
+        +varchar nome
+        *varchar unique email
+        *varchar password
+    }
+    clientes <|--emprestimos
+    emprestimos <|-- parcelas
+    parcelas <|-- pagamentos
 
 ```
