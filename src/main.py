@@ -2,4 +2,5 @@ import tkinter as tk
 
 version = tk.TkVersion
 
-print(version)
+if __name__ == '__main__':
+    print("teste")
