@@ -38,3 +38,8 @@ financeiro_desktop/
 * lembrete com notificação;
 * Os usuários em abertos devem ser notifificados,
 * Fazer os gráficos dos rendimentos por mês;
+
+
+https://www.sqlitetutorial.net/sqlite-data-types/
+
+https://www.sqlitetutorial.net/sqlite-python/insert/
