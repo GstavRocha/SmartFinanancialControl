@@ -3,7 +3,7 @@ from pathlib import Path
 
 class Database_Manager:
     def __init__(self, dbname= "financeiro.db"):
-        self.db_path = Path(__file__).parent / "financeiro.db"
+        self.db_path = Path(__file__).parent / "data" /"financeiro.db"
         self.conn = sqlite3.connect(self.db_path)
         self.cursor = self.conn.cursor()
     

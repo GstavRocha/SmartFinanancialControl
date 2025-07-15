@@ -1,7 +1,7 @@
 # SmartFinanancialControl
 # Sistema Financeiro Desktop
 
-💡 Um sistema simples para controle financeiro em Python + SQLite.
+💡This system uses python with tkint for UI presentation and SQLite to Database.
 
 ## Como executar
 
@@ -9,27 +9,18 @@
 cd src
 python main.py
 
-financeiro_desktop/
-├── src/
-│   ├── __init__.py                 # Arquivo vazio para indicar pacote
-│   ├── main.py                     # Ponto de entrada da aplicação
-│   ├── db.py                       # Funções de inicialização e acesso ao banco
-│   ├── calculos.py                 # Funções de saldo, fluxo, devedores
-│   ├── ui.py                       # Interface Tkinter (ou outra)
-│   └── graficos.py                 # Funções para gerar os gráficos
-│
+smartFinancial/
 ├── data/
-│   └── financeiro.db               # Arquivo do banco de dados (gerado em runtime)
-│
-├── assets/
-│   └── icone.ico                   # Ícone opcional para o executável
-│
-├── dist/                           # Onde o PyInstaller vai gerar o exe
-│
-├── build/                          # Pasta de build do PyInstaller
-│
-├── requirements.txt                # Dependências (ex.: matplotlib)
-└── README.md                       # Documentação básica do projeto
+│   └── financeiro.db
+├── models/
+│   └── cliente.py
+├── presenters/
+│   └── cliente_presenter.py
+├── views/
+│   └── cliente_view.py
+├── db.py
+└── main.py
+  # Documentação básica do projeto
 
 ```
 
@@ -43,3 +34,14 @@ financeiro_desktop/
 https://www.sqlitetutorial.net/sqlite-data-types/
 
 https://www.sqlitetutorial.net/sqlite-python/insert/
+
+## About MPV Achitecture:
+
+1. **VIEW**: This has resposabilies to  User Interface Layer;
+2. **MODEL**: Is reponsabile for managing the date, and some business logic;
+3. It is the layer of the middle about the Model and the View. 
+
+**REFERENCE**
+<br/>
+On this reference we have some informations about Model View Present:
+[DEV MEDIA](https://www.devmedia.com.br/o-padrao-mvp-model-view-presenter/3043)
