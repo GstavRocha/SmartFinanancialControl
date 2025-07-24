@@ -2,4 +2,5 @@ matplotlib
 tkinter
 sqlite3
 sudo apt-get install python3-tk
+customtkinter
 pyinstaller --onefile --noconsole ../src/main.py --icon=../assets/icone.ico

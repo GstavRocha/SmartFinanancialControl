@@ -3,18 +3,18 @@ from pathlib import Path
 
 class Database_Manager:
     def __init__(self, dbname= "financeiro.db"):
-        self.db_path = Path(__file__).parent / "data" /"financeiro.db"
-        self.conn = sqlite3.connect(self.db_path)
+        self.db_path = Path(__file__).parent / "data" /dbname
+        self.conn = sqlite3.connect(str(self.db_path))
         self.cursor = self.conn.cursor()
     def _connect(self):
         print("estabelecendo conexao")
-        self.conn = sqlite3.connect(self, self.db_path)
-        self.conn = self.conn.cursor()
+        self.conn = sqlite3.connect(str(self.db_path))
+        self.cursor = self.conn.cursor()
         print("conexao estabelecida")
     
     def reconnect(self):
-        print('reconectando ao banco de dados')
-        self.close()
+        if self.conn:
+            self.conn.close()
         self._connect()
         
     def inicializar_tabelas(self):
