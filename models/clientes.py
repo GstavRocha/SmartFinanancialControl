@@ -30,6 +30,7 @@ class ClientesDAO:
         self.db.conn.commit()
         self.db.conn.close()
         return result
+    
     def get_id_cliente(self, id):
         self.db._connect()
         self.db.cursor.execute(f"SELECT * FROM clientes WHERE id_cliente = {id};")
@@ -37,7 +38,31 @@ class ClientesDAO:
         self.db.conn.commit()
         self.db.conn.close()        
         return result
-    def search_cliente(self, )
+    
+    def search_cliente(self, param):
+        check_conn = self.db._connect()
+        if check_conn:
+            print("conectado")
+        sql = "SELECT * FROM clientes WHERE nome_cliente LIKE ? ;"
+        parametro = f"%{param}%"
+        self.db.cursor.execute(sql,(parametro,))
+        result = self.db.cursor.fetchall()
+        self.db.conn.commit()
+        self.db.conn.close()
+        return result
+    
+    def get_photo_name(self):
+        check_conn = self.db._connect()
+        if check_conn:
+            print("connected")
+        sql = "SELECT id_cliente, nome_cliente,foto_cliente FROM clientes;"
+        self.db.cursor.execute(sql)
+        result = self.db.cursor.fetchall()
+        self.db.conn.commit()
+        self.db.conn.close()
+        return result
+    
+    def get
     def close(self):
         self.db.close()
         

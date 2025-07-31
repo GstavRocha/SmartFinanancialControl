@@ -14,8 +14,14 @@ version = tk.TkVersion
 if __name__ == '__main__':
     clientes = ClientesDAO()
     # check = clientes.insert_clientes("Gustavo2", "99999999","nooseguitar@hotmail.com","ruta teste",".///l", )
-    getAllclientes = clientes.get_id_cliente(1)
+    getAllclientes = clientes.get_id_cliente(12)
+    # search = clientes.search_cliente('Gustavo')
     print(getAllclientes)
+
+    fotos = clientes.get_photo()
+    print(fotos)
+    # search = clientes.search_cliente("G")
+    # print(search)
 
     
 
