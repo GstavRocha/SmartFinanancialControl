@@ -51,18 +51,19 @@ class ClientesDAO:
         self.db.conn.close()
         return result
     
-    def get_photo_name(self):
+    def get_photo_by_id(self, id):
         check_conn = self.db._connect()
         if check_conn:
             print("connected")
-        sql = "SELECT id_cliente, nome_cliente,foto_cliente FROM clientes;"
-        self.db.cursor.execute(sql)
+        sql = "SELECT foto_cliente, nome_cliente FROM clientes WHERE id_cliente = ?;"
+        params = f"{id}"
+        self.db.cursor.execute(sql,(params,))
         result = self.db.cursor.fetchall()
         self.db.conn.commit()
         self.db.conn.close()
         return result
-    
-    def get
+    # def update_cliente(self, endereco):
+        
     def close(self):
         self.db.close()
         
