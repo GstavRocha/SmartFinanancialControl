@@ -15,16 +15,17 @@ version = tk.TkVersion
 if __name__ == '__main__':
     Query_Util(Database_Manager())
     clientes = ClientesDAO()
-    # check = clientes.insert_clientes("Gustavo2", "99999999","nooseguitar@hotmail.com","ruta teste",".///l", )
-    # getAllclientes = clientes.get_id_cliente(12)
-    # search = clientes.search_cliente('Gustavo')
-    # print(getAllclientes)
-
-    # fotos = clientes.get_photo_by_id(1)
-    # print(fotos)
-    # search = clientes.search_cliente("G")
-    # print(search)
-
+    # novo = clientes.create({
+    #     "nome_cliente": "Debora",
+    #     "contato_cliente": "2323232323",
+    #     "email_cliente": "beba@gmail.com",
+    #     "endereco_cliente": "rua da Cocada",
+    #     "foto_cliente": "Teste/.//"
+    # })
+    teste = clientes.get_cliente_by_id(1)
+    print(teste)
+    # get_cliente = clientes.get_cliente_by_id(26)
+    # print(get_cliente)
     
 
 

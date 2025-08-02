@@ -4,20 +4,33 @@ from pathlib import Path
 class Database_Manager:
     def __init__(self, dbname= "financeiro.db"):
         self.db_path = Path(__file__).parent / "data" /dbname
-        self.conn = sqlite3.connect(str(self.db_path))
-        self.cursor = self.conn.cursor()
-    def _connect(self):
-        print("estabelecendo conexao")
-        self.conn = sqlite3.connect(str(self.db_path))
-        self.cursor = self.conn.cursor()
-        print("conexao estabelecida")
+        self.conn = None
+        self.cursor = None
+        self.connect()
+
+    def connect(self):
+        """Abre uma conexão com o banco."""
+        if self.conn is None:
+            self.conn = sqlite3.connect(str(self.db_path))
+            self.conn.row_factory = sqlite3.Row 
+            self.cursor = self.conn.cursor()
+        return self.conn
     
     def reconnect(self):
+        """Fecha e abre novamente a conexão (se necessário)."""
+        self.close()
+        return self.connect()
+    
+    def close(self):
+        """Fecha a conexão com o banco."""
         if self.conn:
+            self.conn.commit()
             self.conn.close()
-        self._connect()
-        
+            self.conn = None
+            self.cursor = None
+
     def inicializar_tabelas(self):
+        self.connect()
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS clientes (
             id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -83,7 +96,3 @@ class Database_Manager:
         ''')
 
         self.conn.commit()
-
-    def close(self):
-        self.conn.close()
-        
