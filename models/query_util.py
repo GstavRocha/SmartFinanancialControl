@@ -25,6 +25,13 @@ class Query_Util:
         self.db.cursor.execute(sql, (value,))
         row = self.db.cursor.fetchone()
         return dict(row) if row else None
+    
+    def find_a_column(self, table, show_column, where_column, value):
+        self.db.connect()
+        sql = f"SELECT {show_column} from {table} WHERE {where_column} = ? LIMIT 1;"
+        self.db.cursor.execute(sql, (value,))
+        row = self.db.cursor.fetchone()
+        return dict(row) if row else None
 
     # ----------------- INSERT -----------------
     def insert(self, table, data: dict):

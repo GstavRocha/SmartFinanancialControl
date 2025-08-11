@@ -36,6 +36,26 @@ class ClientesDAO(BaseDAO):
         }
         return self.create(novo_cliente)
     
+    def find_cliente_by_id(self, id):
+        return self.find_a("foto_cliente",self.primary_key, id)
+    
+    def select_first_photo(self,id):
+        return self.find_a("foto_cliente",self.primary_key,id)
+    
+    def update_cliente_by_id(self,id ,nome, contato, endereco, email, foto ):
+        update_cliente = {
+            "nome_cliente": nome,
+            "contato_cliente": contato,
+            "endereco_cliente": endereco,
+            "email_cliente": email,
+            "foto_cliente": foto
+        }
+        return self.update(id,update_cliente)
+    def delete_cliente_by_id(self, id):
+        if self.delete(id) == 1:
+            return "user has deleted"
+        else:
+            return "user hasn't deleted"
     def close(self):
         self.db.close()
         

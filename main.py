@@ -22,8 +22,18 @@ if __name__ == '__main__':
     #     "endereco_cliente": "rua da Cocada",
     #     "foto_cliente": "Teste/.//"
     # })
-    teste = clientes.get_cliente_by_id(1)
-    print(teste)
+    teste = clientes.select_first_photo(26)
+    todos = clientes.get_all()
+    gustavo = {
+        "nome_cliente": "Debora2",
+        "contato_cliente": "2323232323",
+        "email_cliente": "beba@gmail.com",
+        "endereco_cliente": "rua da Cocada",
+        "foto_cliente": "Teste/.//"
+    }
+    upate = clientes.delete(26)
+    
+    print(todos)
     # get_cliente = clientes.get_cliente_by_id(26)
     # print(get_cliente)
     

@@ -45,3 +45,6 @@ https://www.sqlitetutorial.net/sqlite-python/insert/
 <br/>
 On this reference we have some informations about Model View Present:
 [DEV MEDIA](https://www.devmedia.com.br/o-padrao-mvp-model-view-presenter/3043)
+
+## Anotations In English about smartfinancial
+
