@@ -9,33 +9,15 @@ from models.query_util import Query_Util
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from models.clientes import ClientesDAO
+from models.emprestimos import EmprestimosDAO
 version = tk.TkVersion
 
 
 if __name__ == '__main__':
     Query_Util(Database_Manager())
     clientes = ClientesDAO()
-    # novo = clientes.create({
-    #     "nome_cliente": "Debora",
-    #     "contato_cliente": "2323232323",
-    #     "email_cliente": "beba@gmail.com",
-    #     "endereco_cliente": "rua da Cocada",
-    #     "foto_cliente": "Teste/.//"
-    # })
-    teste = clientes.select_first_photo(26)
-    todos = clientes.get_all()
-    gustavo = {
-        "nome_cliente": "Debora2",
-        "contato_cliente": "2323232323",
-        "email_cliente": "beba@gmail.com",
-        "endereco_cliente": "rua da Cocada",
-        "foto_cliente": "Teste/.//"
-    }
-    upate = clientes.delete(26)
-    
-    print(todos)
-    # get_cliente = clientes.get_cliente_by_id(26)
-    # print(get_cliente)
-    
-
+    emprestimos = EmprestimosDAO()
+    check = emprestimos.get_emprestimo_by_id(2)
+    # emprestimo = emprestimos.insert_emprestimos(2, 100,2,"dasda",12,"ativo")
+    print(check)
 
