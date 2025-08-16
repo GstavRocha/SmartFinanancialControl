@@ -21,6 +21,7 @@ class BaseDAO:
     def find_by(self, column, value):
         """Busca registros por uma coluna específica."""
         return self.query.select_by(self.table_name, column, value)
+    
     def find_a(self, show_column, where_column, value):
         return self.query.find_a_column(self.table_name, show_column, where_column,value)
 

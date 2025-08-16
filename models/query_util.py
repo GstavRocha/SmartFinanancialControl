@@ -12,6 +12,7 @@ class Query_Util:
         rows = self.db.cursor.fetchall()
         return [dict(row) for row in rows]
 
+
     def select_by(self, table, column, value):
         self.db.connect()
         sql = f"SELECT * FROM {table} WHERE {column} = ?;"
@@ -77,3 +78,9 @@ class Query_Util:
         self.db.cursor.execute(sql, (where_value,))
         self.db.conn.commit()
         return self.db.cursor.rowcount
+    
+    def delete_one(self, table, column, value):
+        self.db.connerct()
+        sql = f"DELETE FROM {table} WHERE"
+
+        #  VALOR É NOT NULL NÃO DA PARA DELETAR, O QUE POSSO FAZER É REMOVER E ADICIONAR ZERO.

@@ -48,3 +48,5 @@ On this reference we have some informations about Model View Present:
 
 ## Anotations In English about smartfinancial
 
+## Some Functions
+* Make calculum about "parcelas" and juros every transaction
