@@ -7,6 +7,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from Database_Manager import Database_Manager
 from models.query_util import Query_Util
 from models.DAO_utils import BaseDAO
+from models.validators.date_validation import mounths
 
 class EmprestimosDAO(BaseDAO):
     def __init__(self):
@@ -69,8 +70,19 @@ class EmprestimosDAO(BaseDAO):
         real_value = value_data[self.valor] + new_valor
         update_value = {self.valor: real_value}
         return self.update(id, update_value)
+    def update_date_by_id(self, day, mounth): // PAREI AQUI RESOLVENDO DATA DIA  E MES.
+        
+        full_date = {self.data: f"{day[date]}"}
+        return month
+        
     
-    def delete_value_to_by_id(self, value, id):
-        return 
+    def delete_value_to_by_id(self, id):
+        old_value = self.get_valor_by_id(id)
+        update_value = old_value[self.valor]
+        if update_value > 0.1:
+            self.update(id,{self.valor: 0})
+            return self.get_valor_by_id(2)
+        self.update(id,{self.valor: 0})
+        return self.get_valor_by_id(id)
     def close(self):
         self.db.close()

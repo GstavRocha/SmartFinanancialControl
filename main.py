@@ -19,11 +19,8 @@ if __name__ == '__main__':
     clientes = ClientesDAO()
     emprestimos = EmprestimosDAO()
     # all_clientes = clientes.get_all()
-
-    check  = emprestimos.add_value_to_valor_by_id(5.2,2)
-    print(check)
-    time.sleep(2.0)
-    verify = emprestimos.get_valor_by_id(2)
+    verify = emprestimos.update_date_by_id(2)
+    # time.sleep(1.0)
     print(verify)
 
     # emprestimo = emprestimos.insert_emprestimos(2, 100,2,"dasda",12,"ativo")
