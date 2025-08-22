@@ -43,6 +43,9 @@ class EmprestimosDAO(BaseDAO):
         return self.find_a(self.emprestimo, self.primary_key, id)
     
     def get_juros_by_id(self, id):
+        """
+        FAZER O CALCULO DE JUROS SOBRE JUROS EM REFRÊNCIA AOS DIAS
+        """
         return self.find_a(self.juros, self.primary_key, id)
     
     def get_numero_parcelas_by_id(self, id):
@@ -58,7 +61,6 @@ class EmprestimosDAO(BaseDAO):
             "status": status
         }
         return self.create(new_emprestimo)
-    
     def update_valor_by_id(self, value, id):
         new_value = { self.valor: value}
         old_value = self.get_valor_by_id(id)
@@ -66,6 +68,10 @@ class EmprestimosDAO(BaseDAO):
             return {"json": 400}
         else:
             return self.update(id, new_value)
+    def update_juros_by_id(self, id, juros):
+        float_juros = float(juros)
+        new_juros = {self.juros: float_juros}
+        return self.update(id, new_juros)
     
     def add_value_to_valor_by_id(self, value, id):
         value_data = self.get_valor_by_id(id)
@@ -73,13 +79,19 @@ class EmprestimosDAO(BaseDAO):
         real_value = value_data[self.valor] + new_valor
         update_value = {self.valor: real_value}
         return self.update(id, update_value)
-    def update_date_by_id(self, day, mounth):
-        today = day
+    
+    def update_vencimento_by_id(self, id, day, mounth):
+        """
+        day deve passar "01" para ter o zero na frente da dia
+        """
         mounthly = mounths[mounth]
         year = datetime.now()
         full_date = {self.data: f"{day}/{mounthly}/{year.year}"}
-        return full_date
-        
+        return self.update(id, full_date)    
+    def update_parcelas_by_id(self, id, parcelas):
+        int_parcelas = int(parcelas)
+        new_parcelas = {self.parcelas: int_parcelas}
+        return self.update(id, new_parcelas)
     
     def delete_value_to_by_id(self, id):
         old_value = self.get_valor_by_id(id)
@@ -89,5 +101,6 @@ class EmprestimosDAO(BaseDAO):
             return self.get_valor_by_id(2)
         self.update(id,{self.valor: 0})
         return self.get_valor_by_id(id)
+    
     def close(self):
         self.db.close()
