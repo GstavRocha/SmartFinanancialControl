@@ -29,11 +29,10 @@ class Query_Util:
     
     def find_a_column(self, table, show_column, where_column, value):
         self.db.connect()
-        sql = f"SELECT {show_column} from {table} WHERE {where_column} = ? LIMIT 1;"
+        sql = f"SELECT {show_column} from {table} WHERE {where_column} = ?;"
         self.db.cursor.execute(sql, (value,))
-        row = self.db.cursor.fetchone()
-        return dict(row) if row else None
-
+        rows = self.db.cursor.fetchall()
+        return [dict(row) for row in rows]
     # ----------------- INSERT -----------------
     def insert(self, table, data: dict):
         """

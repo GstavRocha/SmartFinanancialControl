@@ -45,6 +45,15 @@ class ParcelasDAO(BaseDAO):
     def get_vencimento_by_id(self, id):
         return self.find_a(self.vencimento, self.id_parcelas, id)
     
+    def get_pagamento_by_id(self, id):
+        return self.find_a(self.pagamento, self.id_parcelas, id)
+    
+    def get_status_by_id(self, id):
+        return self.find_a(self.status, self.id_parcelas, id)
+    
+    def get_all_parcelas_by_id_emprestimo(self, id):
+        return self.find_a(self.valor,self.id_emprestimo, id)
+    
     def insert_parcelas(self, numero_emprestimo, valor, data_vencimento, data_pagamento, num_status, id_emprestimo):
         new_parcelas = {
             self.numero_emprestimo: numero_emprestimo,
