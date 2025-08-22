@@ -19,7 +19,7 @@ if __name__ == '__main__':
     clientes = ClientesDAO()
     emprestimos = EmprestimosDAO()
     # all_clientes = clientes.get_all()
-    verify = emprestimos.update_date_by_id(2)
+    verify = emprestimos.update_date_by_id(2,1)
     # time.sleep(1.0)
     print(verify)
 

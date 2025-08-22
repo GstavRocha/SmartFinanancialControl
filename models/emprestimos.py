@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from datetime import datetime
 
 # Adiciona o diretório raiz ao sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -35,7 +36,9 @@ class EmprestimosDAO(BaseDAO):
     
     def get_valor_by_id(self,id):
         return self.find_a(self.valor,self.primary_key,id)
-    
+    """
+    Como resolver vencimento?
+    """
     def get_vencimento_by_id(self, id):
         return self.find_a(self.emprestimo, self.primary_key, id)
     
@@ -70,10 +73,12 @@ class EmprestimosDAO(BaseDAO):
         real_value = value_data[self.valor] + new_valor
         update_value = {self.valor: real_value}
         return self.update(id, update_value)
-    def update_date_by_id(self, day, mounth): // PAREI AQUI RESOLVENDO DATA DIA  E MES.
-        
-        full_date = {self.data: f"{day[date]}"}
-        return month
+    def update_date_by_id(self, day, mounth):
+        today = day
+        mounthly = mounths[mounth]
+        year = datetime.now()
+        full_date = {self.data: f"{day}/{mounthly}/{year.year}"}
+        return full_date
         
     
     def delete_value_to_by_id(self, id):
