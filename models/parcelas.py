@@ -48,11 +48,18 @@ class ParcelasDAO(BaseDAO):
     def get_pagamento_by_id(self, id):
         return self.find_a(self.pagamento, self.id_parcelas, id)
     
+    # pega o primeiro
     def get_status_by_id(self, id):
-        return self.find_a(self.status, self.id_parcelas, id)
+        return self.get_by_id(id)
     
     def get_all_parcelas_by_id_emprestimo(self, id):
-        return self.find_a(self.valor,self.id_emprestimo, id)
+        return self.find_a(self.valor, self.id_emprestimo, id)
+    
+    def get_all_data_parcelas_by_id(self, id):
+        return self.find_a(self.vencimento,self.id_emprestimo, id)
+    
+    def get_all_pagamentos_by_id(self, id):
+        return self.find_a(self.pagamento, self.id_emprestimo, id)
     
     def insert_parcelas(self, numero_emprestimo, valor, data_vencimento, data_pagamento, num_status, id_emprestimo):
         new_parcelas = {
@@ -64,3 +71,19 @@ class ParcelasDAO(BaseDAO):
             self.id_emprestimo: id_emprestimo
         }
         return self.create(new_parcelas)
+    def update_parcelas_by_id(self, id, numero_emprestimo, valor, data, pagamento, num_status,id_emprestimo):
+        new_parcelas = {
+            self.numero_emprestimo: numero_emprestimo,
+            self.valor: valor,
+            self.vencimento: data,
+            self.pagamento: pagamento,
+            self.status: status[num_status],
+            self.id_emprestimo: id_emprestimo
+        }
+        update = self.update(id, new_parcelas)
+        if update == 0:
+            return {"json":400}
+        else:
+            return self.update(id, new_parcelas)
+    def update_numero_emprestimo(self, id, numero):
+        old_numero = parei aqui, tenho que fazer pra ele trazer o update do numero de emprestimos
