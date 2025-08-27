@@ -22,16 +22,14 @@ if __name__ == '__main__':
     emprestimos = EmprestimosDAO()
     parcelas = ParcelasDAO()
     # all_clientes = clientes.get_all()
-    todas = parcelas.get_status_by_id(1)
+    # todas = parcelas.get_status_by_id(1)
     # todas = parcelas.get_all()
-    insert  = parcelas.update_parcelas_by_id(1,3,300,"10/10/2025","08/10/2025",2,1)
-
+    # insert  = parcelas.add_numero_emprestimo(1,3)
+    emprestimos.add_value_to_valor_by_id(1, 2.0)
     
     # time.sleep(1.0)
-    print(insert)
+    # print(pr)
     # print("-----\n")
-    print(todas)
-
     # emprestimo = emprestimos.insert_emprestimos(2, 100,2,"dasda",12,"ativo")
     # print(insert)
 

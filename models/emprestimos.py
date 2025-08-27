@@ -73,12 +73,13 @@ class EmprestimosDAO(BaseDAO):
         new_juros = {self.juros: float_juros}
         return self.update(id, new_juros)
     
-    def add_value_to_valor_by_id(self, value, id):
+    def add_value_to_valor_by_id(self, id, value):
         value_data = self.get_valor_by_id(id)
         new_valor = float(value)
-        real_value = value_data[self.valor] + new_valor
-        update_value = {self.valor: real_value}
-        return self.update(id, update_value)
+        real_value = value_data[0]
+        print(real_value)
+        # update_value = {self.valor: real_value}
+        # return self.update(id, update_value)
     
     def update_vencimento_by_id(self, id, day, mounth):
         """
