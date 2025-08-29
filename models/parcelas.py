@@ -71,6 +71,7 @@ class ParcelasDAO(BaseDAO):
             self.id_emprestimo: id_emprestimo
         }
         return self.create(new_parcelas)
+    
     def update_parcelas_by_id(self, id, numero_emprestimo, valor, data, pagamento, num_status,id_emprestimo):
         new_parcelas = {
             self.numero_emprestimo: numero_emprestimo,
@@ -85,7 +86,10 @@ class ParcelasDAO(BaseDAO):
             return {"json":400}
         else:
             return self.update(id, new_parcelas)
-    def add_numero_emprestimo(self, id, numero):
+    """
+    NÃO TERMINEI EMPRESTIMOS
+    """
+    def add_numero_emprestimo(self, id):
         old_numero = self.get_numero_emprestimos_by_id(id)
         first_number = old_numero[self.numero_emprestimo]
     

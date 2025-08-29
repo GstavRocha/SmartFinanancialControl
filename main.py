@@ -12,6 +12,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from models.clientes import ClientesDAO
 from models.emprestimos import EmprestimosDAO
 from models.parcelas import ParcelasDAO
+from models.pagamentos import PagamentosDAO
 
 version = tk.TkVersion
 
@@ -21,12 +22,16 @@ if __name__ == '__main__':
     clientes = ClientesDAO()
     emprestimos = EmprestimosDAO()
     parcelas = ParcelasDAO()
+    paga = PagamentosDAO()
     # all_clientes = clientes.get_all()
     # todas = parcelas.get_status_by_id(1)
     # todas = parcelas.get_all()
-    # insert  = parcelas.add_numero_emprestimo(1,3)
-    emprestimos.add_value_to_valor_by_id(1, 2.0)
-    
+    # insert  = parcelas.add_numero_emprestimo(1)
+    # emprestimos.update_status_by_id(1,2)
+    paga.update_observacao(2, "I bielve that I can will sucess")
+    check = paga.get_observacao_by_id(2)
+    # check = emprestimos.get_valor_by_id(1)
+    print(check)
     # time.sleep(1.0)
     # print(pr)
     # print("-----\n")
