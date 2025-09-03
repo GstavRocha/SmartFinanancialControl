@@ -30,7 +30,7 @@ class UsuarioDAO(BaseDAO):
     
     def get_nome_by_id(self, id):
         return self.find_a(self.nome, self.primary_key,id)
-    def 
+    def to fazendo aqui
     def insert_usuario(self, nome, email, password):
         new_usuario = {
             self.nome: nome,
