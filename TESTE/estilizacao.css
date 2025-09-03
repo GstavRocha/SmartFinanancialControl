@@ -1,0 +1,14 @@
+/* minha css */
+body{
+        background-color: #401A80;
+		
+	}
+.kbc{
+        background-image: url('fios.jpg');
+		background-position: center;
+		widht: 50%;
+		float: center;
+		font-family: Fantasy;
+		color: #ffff;
+		text-align: center;
+    }
