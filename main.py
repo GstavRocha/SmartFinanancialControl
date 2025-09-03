@@ -13,6 +13,7 @@ from models.clientes import ClientesDAO
 from models.emprestimos import EmprestimosDAO
 from models.parcelas import ParcelasDAO
 from models.pagamentos import PagamentosDAO
+from models.usuarios import UsuarioDAO
 
 version = tk.TkVersion
 
@@ -23,13 +24,15 @@ if __name__ == '__main__':
     emprestimos = EmprestimosDAO()
     parcelas = ParcelasDAO()
     paga = PagamentosDAO()
+    usuarios = UsuarioDAO()
+    # insere = usuarios.insert_usuario("Luiz", "gustavo@gmail.com", "123123")
     # all_clientes = clientes.get_all()
     # todas = parcelas.get_status_by_id(1)
     # todas = parcelas.get_all()
     # insert  = parcelas.add_numero_emprestimo(1)
     # emprestimos.update_status_by_id(1,2)
-    paga.update_observacao(2, "I bielve that I can will sucess")
-    check = paga.get_observacao_by_id(2)
+    # paga.update_observacao(2, "I bielve that I can will sucess")
+    check = usuarios.get_nome_by_id(1)
     # check = emprestimos.get_valor_by_id(1)
     print(check)
     # time.sleep(1.0)

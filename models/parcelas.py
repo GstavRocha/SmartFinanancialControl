@@ -27,7 +27,7 @@ class ParcelasDAO(BaseDAO):
         self.id_emprestimo = "id_emprestimo"
         super().__init__(
             table_name="parcelas",
-            primary_key="id_parcelas",
+            primary_key=self.id_parcelas,
             query_util=query
         )
     def get_all_parcelas(self):
@@ -86,9 +86,7 @@ class ParcelasDAO(BaseDAO):
             return {"json":400}
         else:
             return self.update(id, new_parcelas)
-    """
-    NÃO TERMINEI EMPRESTIMOS
-    """
+        
     def add_numero_emprestimo(self, id):
         old_numero = self.get_numero_emprestimos_by_id(id)
         first_number = old_numero[self.numero_emprestimo]
