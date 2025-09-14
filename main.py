@@ -9,36 +9,31 @@ import time
 # Adiciona o diretório raiz ao sys.path, garantindo acesso à Database_Manager.py
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from models.clientes import ClientesDAO
-from models.emprestimos import EmprestimosDAO
-from models.parcelas import ParcelasDAO
-from models.pagamentos import PagamentosDAO
+from services.validators.validacao import is_validate_email, validade_required_fields
+from services.validators.execptionsp import ValidationError, NotFoundError, ConflictError
+from services.usuario import Usuario_service
+# from models.clientes import ClientesDAO
+# from models.emprestimos import EmprestimosDAO
+# from models.parcelas import ParcelasDAO
+# from models.pagamentos import PagamentosDAO
 from models.usuarios import UsuarioDAO
 
 version = tk.TkVersion
-
+def main():
+    # Query_Util(Database_Manager())
+    # clientes = ClientesDAO()
+    # emprestimos = EmprestimosDAO()
+    # parcelas = ParcelasDAO()
+    # paga = PagamentosDAO()
+    user = UsuarioDAO()
+    ususario = Usuario_service()
+    nome = "gustavo2"
+    email = "gustavo@email2.com"
+    password = "123gustavo"
+  
+    check = ususario.criar_usuario(nome, email, password)
+    ver = user.get_all_usuarios()
+    print(ver)
 
 if __name__ == '__main__':
-    Query_Util(Database_Manager())
-    clientes = ClientesDAO()
-    emprestimos = EmprestimosDAO()
-    parcelas = ParcelasDAO()
-    paga = PagamentosDAO()
-    usuarios = UsuarioDAO()
-    # insere = usuarios.insert_usuario("Luiz", "gustavo@gmail.com", "123123")
-    # all_clientes = clientes.get_all()
-    # todas = parcelas.get_status_by_id(1)
-    # todas = parcelas.get_all()
-    # insert  = parcelas.add_numero_emprestimo(1)
-    # emprestimos.update_status_by_id(1,2)
-    # paga.update_observacao(2, "I bielve that I can will sucess")
-    check = usuarios.update_password_by_id(1,"2504")
-    c = usuarios.get_all()
-    # check = emprestimos.get_valor_by_id(1)
-    print(c)
-    # time.sleep(1.0)
-    # print(pr)
-    # print("-----\n")
-    # emprestimo = emprestimos.insert_emprestimos(2, 100,2,"dasda",12,"ativo")
-    # print(insert)
-
+    main()
