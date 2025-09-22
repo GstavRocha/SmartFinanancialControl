@@ -18,7 +18,7 @@ def validade_required_fields(data: UsuarioDAO) -> None:
         raise ValidationError("Campos obrigatórios: nome, email, passwrord")
 
 
-def validade_required_fields(data: Mapping[str, Any], required: Sequence[str]) -> None:
-    faltando = [k for k in required if not data.get(k)]
-    if faltando:
-        raise ValidationError(f"Campos obrigatórios faltando: {', '.join(faltando)}")
+# def validade_required_fields(data: Mapping[str, Any], required: Sequence[str]) -> None:
+#     faltando = [k for k in required if not data.get(k)]
+#     if faltando:
+#         raise ValidationError(f"Campos obrigatórios faltando: {', '.join(faltando)}")

@@ -10,8 +10,14 @@ import time
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from services.validators.validacao import is_validate_email, validade_required_fields
-from services.validators.execptionsp import ValidationError, NotFoundError, ConflictError
+from services.validators.execptionsp import (
+    ValidationError,
+    NotFoundError,
+    ConflictError,
+)
 from services.usuario import Usuario_service
+from services.clientes import Clientes_service
+from services.pagamentos import Pagamentos_service
 # from models.clientes import ClientesDAO
 # from models.emprestimos import EmprestimosDAO
 # from models.parcelas import ParcelasDAO
@@ -19,6 +25,8 @@ from services.usuario import Usuario_service
 from models.usuarios import UsuarioDAO
 
 version = tk.TkVersion
+
+
 def main():
     # Query_Util(Database_Manager())
     # clientes = ClientesDAO()
@@ -26,10 +34,14 @@ def main():
     # parcelas = ParcelasDAO()
     # paga = PagamentosDAO()
     user = UsuarioDAO()
-    ususario = Usuario_service()
-  
-    ver = user.get_all_usuarios()
-    print(ver)
+    user_service = Usuario_service()
+    cliente_service = Clientes_service()
+    pagamentos = Pagamentos_service()
+    
+    check = pagamentos.get_data_pagamento(2)
+    # ver = user.get_all_usuarios()
+    print(check)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
