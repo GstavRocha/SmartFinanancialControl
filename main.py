@@ -27,11 +27,7 @@ def main():
     # paga = PagamentosDAO()
     user = UsuarioDAO()
     ususario = Usuario_service()
-    nome = "gustavo2"
-    email = "gustavo@email2.com"
-    password = "123gustavo"
   
-    check = ususario.criar_usuario(nome, email, password)
     ver = user.get_all_usuarios()
     print(ver)
 
