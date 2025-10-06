@@ -18,6 +18,7 @@ from services.validators.execptionsp import (
 from services.usuario import Usuario_service
 from services.clientes import Clientes_service
 from services.pagamentos import Pagamentos_service
+from services.parcelas import Parcelas_service
 # from models.clientes import ClientesDAO
 # from models.emprestimos import EmprestimosDAO
 # from models.parcelas import ParcelasDAO
@@ -37,10 +38,12 @@ def main():
     user_service = Usuario_service()
     cliente_service = Clientes_service()
     pagamentos = Pagamentos_service()
+    parcelas = Parcelas_service()
     
     check = pagamentos.get_data_pagamento(2)
+    teste = parcelas.get_numero_emprestimo(1)
     # ver = user.get_all_usuarios()
-    print(check)
+    print(teste)
 
 
 if __name__ == "__main__":
