@@ -19,6 +19,7 @@ from services.usuario import Usuario_service
 from services.clientes import Clientes_service
 from services.pagamentos import Pagamentos_service
 from services.parcelas import Parcelas_service
+from services.emprestimos import Emprestimos_service
 # from models.clientes import ClientesDAO
 # from models.emprestimos import EmprestimosDAO
 # from models.parcelas import ParcelasDAO
@@ -39,11 +40,11 @@ def main():
     cliente_service = Clientes_service()
     pagamentos = Pagamentos_service()
     parcelas = Parcelas_service()
+    emprestimo = Emprestimos_service()
+    check = emprestimo.get_client(1)
     
-    check = pagamentos.get_data_pagamento(2)
-    teste = parcelas.get_numero_emprestimo(1)
     # ver = user.get_all_usuarios()
-    print(teste)
+    print(check)
 
 
 if __name__ == "__main__":

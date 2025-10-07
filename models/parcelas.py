@@ -14,6 +14,8 @@ status = {
     2: "pago",
     3: "atrasado"
 }
+# Fazer rotina de verificação, parcelas pagamento não pode ser menor que data,
+# não pode uma pessoa pagar antes de ter gerado a divida.
 class ParcelasDAO(BaseDAO):
     def __init__(self):
         db = Database_Manager()
@@ -86,9 +88,13 @@ class ParcelasDAO(BaseDAO):
             return {"json":400}
         else:
             return self.update(id, new_parcelas)
-        
+    
+    # O que isso faz? Adiciona uma nova parcela? 
     def add_numero_emprestimo(self, id):
         old_numero = self.get_numero_emprestimos_by_id(id)
         first_number = old_numero[self.numero_emprestimo]
     
         return first_number
+    
+    def delete_parcela(self, id):
+        return self.delete(id)
