@@ -117,7 +117,7 @@ class EmprestimosDAO(BaseDAO):
     
     def delete_value_to_by_id(self, id):
         old_value = self.get_valor_by_id(id)
-        update_value = old_value[self.valor]
+        update_value = old_value[self.valor] # TEM UM ERRO AQUI DEVO OLHAR DEPOIS
         if update_value > 0.1:
             self.update(id,{self.valor: 0})
             return self.get_valor_by_id(2)
