@@ -11,7 +11,11 @@ from models.DAO_utils import BaseDAO
 from models.validators.date_validation import mounths
 from models.validators.status_validation import status_emprestimo
 
-
+status = {
+    1 : "ativo",
+    2: "quitado",
+    3: "atrasado"
+}
 class EmprestimosDAO(BaseDAO):
     def __init__(self):
         db = Database_Manager()
@@ -63,14 +67,14 @@ class EmprestimosDAO(BaseDAO):
     def get_status_by_id(self, id):
         return self.find_a(self.status, self.primary_key, id)
     
-    def insert_emprestimos(self,id_cliente, valor, juros_mensal, data, numero_parcelas, status):
+    def insert_emprestimos(self,id_cliente, valor, juros_mensal, data, numero_parcelas, num_status):
         new_emprestimo = {
             self.cliente: id_cliente,
             self.valor: valor,
             self.juros: juros_mensal,
             self.data: data,
             self.parcelas: numero_parcelas,
-            self.status: status
+            self.status: status[num_status]
         }
         return self.create(new_emprestimo)
     

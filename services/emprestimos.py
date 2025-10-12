@@ -27,4 +27,22 @@ class Emprestimos_service:
     def get_status(self, id: int):
         return self.dao.get_status_by_id(id=id)
 
-    def insert(self, id_cliente: int, valor: float, juros: float, date: str, numero: int, status: )
+    def insert(
+        self,
+        id_cliente: int,
+        valor: float,
+        juros: float,
+        date: str,
+        numero: int,
+        status: int,
+    ):
+        return self.dao.insert_emprestimos(
+            id_cliente=id_cliente,
+            valor=valor,
+            juros_mensal=juros,
+            data=date,
+            numero_parcelas=numero,
+            num_status=status,
+        )
+    
+    def update_data(self, id )

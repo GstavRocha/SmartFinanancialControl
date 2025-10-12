@@ -41,7 +41,7 @@ def main():
     pagamentos = Pagamentos_service()
     parcelas = Parcelas_service()
     emprestimo = Emprestimos_service()
-    check = emprestimo.get_client(1)
+    check = emprestimo.insert(1,30.0,1.1, "05/02/2026", 6, 1)
     
     # ver = user.get_all_usuarios()
     print(check)
