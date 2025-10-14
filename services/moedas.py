@@ -38,14 +38,14 @@ def _quantize(amount: Decimal, code: str) -> Decimal:
     return amount.quantize(exp)
 
 # --------- Provedor de taxas (pluggable) ---------
-class RateProvider(Protocol):
+class Rate_Provider(Protocol):
     """Contrato para provedores de taxa de câmbio.
     Deve retornar um dicionário: {'USD': Decimal('5.61'), ...} relativo à moeda base."""
     def fetch(self, base_currency: str) -> Dict[str, Decimal]:
         ...
 
 @dataclass
-class StaticRateProvider:
+class StaticRate_Provider:
     """Provedor estático para testes/dev. Valores são 1 BASE = rate * TARGET.
     Ex.: base=BRL, rates['USD']=Decimal('5.60') => 1 USD = 5.60 BRL."""
     rates: Dict[str, Decimal]
@@ -57,16 +57,16 @@ class StaticRateProvider:
         return norm
 
 # --------- Serviço de Moedas ---------
-class MoedasService:
+class Moedas_Service:
     """Conversão e formatação de moedas com cache de taxas e arredondamento bancário."""
     def __init__(
         self,
         base_currency: str = "BRL",
-        provider: Optional[RateProvider] = None,
+        provider: Optional[Rate_Provider] = None,
         cache_ttl_seconds: int = 3600,
     ):
         self.base_currency = base_currency.upper()
-        self.provider = provider or StaticRateProvider(
+        self.provider = provider or StaticRate_Provider(
             # taxas exemplo (ajuste conforme seu contexto)
             rates={
                 "BRL": Decimal("1"),
