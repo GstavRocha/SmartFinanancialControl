@@ -351,27 +351,86 @@ Depois do **JurosService**, o próximo passo ideal é o **AmortizacaoService**. 
 ### Assinatura sugerida
 
 ```python
-# services/amortizacao.py
 from decimal import Decimal
 from datetime import date
-from typing import List, Literal, Dict
+from typing import List, Dict, Literal
+from dateutil.relativedelta import relativedelta  # se não quiser dependência, escreva um add_months simples
+from services.juros import Juros_Service  # ajuste o import
 
 TipoAmort = Literal["PRICE", "SAC", "AMERICANO"]
 
 class AmortizacaoService:
-    def __init__(self, juros_service):
-        self.j = juros_service  # injeção do JurosService
+    def __init__(self, juros_service: Juros_Service):
+        self.j = juros_service
+
+    def _add_months(self, d: date, m: int) -> date:
+        return d + relativedelta(months=+m)
+
+    def _pmt(self, principal: Decimal, i_am: Decimal, n: int) -> Decimal:
+        if i_am == 0:
+            return (principal / Decimal(n)).quantize(Decimal("0.01"))
+        fator = (Decimal(1) + i_am) ** Decimal(-n)
+        pmt = principal * i_am / (Decimal(1) - fator)
+        return pmt.quantize(Decimal("0.01"))
 
     def gerar_tabela(
         self,
         principal: Decimal,
-        taxa_am: Decimal,
+        taxa_am: Decimal,              # efetiva a.m.
         n_meses: int,
         primeira_competencia: date,
         sistema: TipoAmort,
         carencia_meses: int = 0,
     ) -> List[Dict]:
-        ...
+        tabela: List[Dict] = []
+        saldo = principal
+
+        # carência: só juros (ou nada) — aqui: só juros
+        for k in range(1, carencia_meses + 1):
+            venc = self._add_months(primeira_competencia, k-1)
+            juros = (saldo * taxa_am).quantize(Decimal("0.01"))
+            tabela.append({
+                "n": k, "venc": venc, "parcela": juros, "juros": juros, "amortizacao": Decimal("0.00"), "saldo": saldo
+            })
+
+        inicio = carencia_meses + 1
+
+        if sistema == "PRICE":
+            pmt = self._pmt(saldo, taxa_am, n_meses)
+            for i in range(inicio, inicio + n_meses):
+                venc = self._add_months(primeira_competencia, i-1)
+                juros = (saldo * taxa_am).quantize(Decimal("0.01"))
+                amort = (pmt - juros).quantize(Decimal("0.01"))
+                saldo = (saldo - amort).quantize(Decimal("0.01"))
+                tabela.append({"n": i, "venc": venc, "parcela": pmt, "juros": juros, "amortizacao": amort, "saldo": saldo})
+
+        elif sistema == "SAC":
+            amort_const = (saldo / Decimal(n_meses)).quantize(Decimal("0.01"))
+            for i in range(inicio, inicio + n_meses):
+                venc = self._add_months(primeira_competencia, i-1)
+                juros = (saldo * taxa_am).quantize(Decimal("0.01"))
+                parcela = (amort_const + juros).quantize(Decimal("0.01"))
+                saldo = (saldo - amort_const).quantize(Decimal("0.01"))
+                tabela.append({"n": i, "venc": venc, "parcela": parcela, "juros": juros, "amortizacao": amort_const, "saldo": saldo})
+
+        elif sistema == "AMERICANO":
+            juros_mes = (saldo * taxa_am).quantize(Decimal("0.01"))
+            for i in range(inicio, inicio + n_meses - 1):
+                venc = self._add_months(primeira_competencia, i-1)
+                tabela.append({"n": i, "venc": venc, "parcela": juros_mes, "juros": juros_mes, "amortizacao": Decimal("0.00"), "saldo": saldo})
+            # última parcela: juros + principal
+            venc = self._add_months(primeira_competencia, inicio + n_meses - 2)
+            parcela_final = (juros_mes + saldo).quantize(Decimal("0.01"))
+            tabela.append({"n": inicio + n_meses - 1, "venc": venc, "parcela": parcela_final, "juros": juros_mes, "amortizacao": saldo, "saldo": Decimal("0.00")})
+
+        # ajuste residual na última linha (evitar saldo -0.01 ou 0.01)
+        if tabela:
+            residual = tabela[-1]["saldo"]
+            if abs(residual) <= Decimal("0.02"):
+                tabela[-1]["amortizacao"] = (tabela[-1]["amortizacao"] + residual).quantize(Decimal("0.01"))
+                tabela[-1]["saldo"] = Decimal("0.00")
+
+        return tabela
 ```
 
 ### Critérios de aceite
